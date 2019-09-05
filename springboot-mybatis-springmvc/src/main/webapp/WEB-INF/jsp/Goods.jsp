@@ -13,6 +13,7 @@
 <body>
 <table>
 	<tr>
+          <th>远程修改数据</th>
 	  <th>商品ID</th>
 	  <th>商家ID</th>
 	  <th>商品名称</th>
