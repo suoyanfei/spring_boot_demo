@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- namespace要和mapper的接口路径一致，mybatis在初始化的时候会解析namespace
+然后进行跟mapper接口做绑定 绑定好了才能验证mapper里边提供的方法和配置文件里的一直不一致
+id要和mapper的接口方法名一样
+ -->
+<mapper namespace="com.syf.mapper.GoodsMaper" >
+    <resultMap id="BaseResultMap" type="com.syf.model.Goods" >
+        <id column="id" property="id" />
+        <result column="seller_id" property="sellerId"  />
+        <result column="goods_name" property="goodsName"  />
+        <result column="default_item_id" property="defaultItemId"/>
+        <result column="audit_status" property="auditStatus"/>
+        <result column="is_marketable" property="isMarketable"/>
+        <result column="brand_id" property="brandId"/>
+        <result column="caption" property="caption"/>
+        <result column="category1_id" property="category1Id"/>
+        <result column="category2_id" property="category2Id"/>
+        <result column="category3_id" property="category3Id"/>
+        <result column="small_pic" property="smallPic"/>
+        <result column="price" property="price"/>
+        <result column="type_template_id" property="typeTemplateId"/>
+        <result column="is_enable_spec" property="isEnableSpec"/>
+        <result column="is_delete" property="isDelete"/>
+    </resultMap>
+    
+   <select id="getGoodsList" resultMap="BaseResultMap" parameterType="com.syf.page.Page">
+      select * from tb_goods tg LEFT JOIN tb_brand tb on tg.brand_id = tb.id 
+      where tb.id=#{pd.id}
+      
+   </select>
+
+</mapper>

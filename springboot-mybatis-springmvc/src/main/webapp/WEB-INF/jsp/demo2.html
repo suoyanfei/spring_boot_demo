@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="../js/jquery-easyui-1.5.2/jquery.min.js"></script>
+<script type="text/javascript" src="../js/jquery-easyui-1.5.2/jquery.easyui.min.js"></script>
+<!-- easyui核心UI文件 css -->  
+<link href="../js/jquery-easyui-1.5.2/themes/default/easyui.css" rel="stylesheet" type="text/css"/>
+<!-- easyui图标 -->
+<link href="../js/jquery-easyui-1.5.2/themes/icon.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" >
+	
+  $(function(){
+	  $("a[title]").click(function(){
+			var src = $(this).attr("title");
+			var url2 = '../item/test.do?arr=dflsdjflds';
+			var url = 'combo.html';
+			var title = $(this).html();
+			if($("#tt").tabs('exists',title)){//判断选项卡是否存在 存在返回true 
+				$('#tt').tabs('select',title);//跳到指定参数的tab页上
+			}else{
+				$("#tt").tabs('add',{
+					  title:title,    
+					  //content:'<iframe  style=width:100%;height:570px src='+ url +' ></iframe>',   
+					  content:"<iframe style='width:100%;height:570px' src='"+url2+"'></iframe>",
+					  closable:true
+				 })	
+			}
+		})
+	  
+	  
+  })
+</script>
+<body>
+
+
+ <div id="cc" class="easyui-layout" style="width:100%;height:100%;" data-options="fit:true">   
+    <div data-options="region:'west',title:'菜单',iconCls:'icon-ok',split:true,plain:true" style="width:200px;">
+   <div class="easyui-accordion" data-options="fit:true,title:'用户管理'">
+	 	 <div title="用户管理" data-options="fit:true">
+	 		<a  title="demo.html">用户列表</a><br>
+	 		<a  title="demo1.html">用户信息</a>
+	 	</div>
+	 	<div title="权限管理" data-options="fit:true"></div>
+	 	<div title="资产管理" data-options="fit:true"></div>
+	 	<div title="部门管理" data-options="fit:true"></div> 
+ </div> 
+  </div>   
+    <div data-options="region:'center',title:'主页面'">
+	    <div id="tt" class="easyui-tabs" >
+	 	
+	   </div>
+   </div>   
+</div> 
+</body>
+</html>

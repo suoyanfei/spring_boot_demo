@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- namespace要和mapper的接口路径一致，mybatis在初始化的时候会解析namespace
+然后进行跟mapper接口做绑定 绑定好了才能验证mapper里边提供的方法和配置文件里的一直不一致
+id要和mapper的接口方法名一样
+ -->
+<mapper namespace="com.syf.mapper.BrandMaper" >
+    <resultMap id="BaseResultMap" type="com.syf.model.Brand" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="first_char" property="firstChar" jdbcType="VARCHAR" />
+    </resultMap>
+    
+   <select id="getBrandList" resultMap="BaseResultMap" parameterType="com.syf.page.Page">
+      select * from tb_brand
+      <where>
+      		<if test="pd.name != null and pd.name != '' ">
+      			name like '%${pd.name}%'
+      		</if>
+      </where>
+       limit  #{startPage},#{pagesize}
+   </select>
+  <update id="updateBrandBy" parameterType="com.syf.model.Brand">
+  	UPDATE tb_brand SET 
+  	name=#{name},
+  	 first_char = #{firstChar}
+  	  WHERE id=#{id}
+  </update>
+  <delete id="deleteBrandById" parameterType="Long">
+   	DELETE FROM tb_brand where id = #{id}
+  </delete>
+  <insert id="insertUser" parameterType="com.syf.model.Brand">
+  	INSERT INTO tb_brand
+  	(name,first_char)
+  	 VALUES
+  	 (
+  	 #{name},
+  	 #{firstChar})
+  </insert>
+  <select id="getTotal" resultType="int">
+  	select COUNT(*) FROM tb_brand
+  </select>
+</mapper>
